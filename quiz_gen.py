@@ -7,8 +7,8 @@ app = FastAPI()
 
 # Load Quiz-Generating Model
 model_path = os.path.abspath("./quizgen_model")  # Ensure absolute path
-tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)  
-model = AutoModelForCausalLM.from_pretrained(model_path, local_files_only=True, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained(model_path)  
+model = AutoModelForCausalLM.from_pretrained(model_path,device_map="auto")
 
 @app.post("/generate_quiz/")
 async def generate_quiz(prompt: str):
