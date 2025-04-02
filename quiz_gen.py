@@ -5,7 +5,7 @@ import torch
 app = FastAPI()
 
 # Load Quiz-Generating Model
-model_path = "./quizgen_model"
+model_path = os.path.abspath("./quizgen_model")
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto")
 
