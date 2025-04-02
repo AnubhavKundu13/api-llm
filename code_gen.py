@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
+import os
 
 app = FastAPI()  # ✅ Make sure this is present
 
 # Load Code-Generating Model
-model_path = os.path.abspath("./codegen_model")
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto")
+model_path = os.path.abspath("./codegen_model")  # Ensure absolute path
+tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)  
+model = AutoModelForCausalLM.from_pretrained(model_path, local_files_only=True, device_map="auto")
 
 @app.post("/generate_code/")
 async def generate_code(prompt: str):
