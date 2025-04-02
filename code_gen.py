@@ -5,7 +5,7 @@ import torch
 app = FastAPI()  # ✅ Make sure this is present
 
 # Load Code-Generating Model
-model_path = "./codegen_model"
+model_path = os.path.abspath("./codegen_model")
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto")
 
